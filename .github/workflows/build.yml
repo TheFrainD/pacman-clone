@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [master, dev]
+    branches: [ master, dev ]
   pull_request:
-    branches: [master, dev]
+    branches: [ master, dev ]
 
 jobs:
   build:
@@ -16,24 +16,24 @@ jobs:
       matrix:
         platform:
           - {
-              name: "Windows",
-              os: "windows-2022",
-              flags: "-G Ninja"
+            name: "Windows",
+            os: "windows-2022",
+            flags: "-G Ninja"
           }
           - {
-              name: "Linux GCC",
-              os: "ubuntu-latest",
-              flags: "-G Ninja"
+            name: "Linux GCC",
+            os: "ubuntu-latest",
+            flags: "-G Ninja"
           }
           - {
-              name: "Linux Clang",
-              os: "ubuntu-latest",
-              flags: "-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G Ninja"
+            name: "Linux Clang",
+            os: "ubuntu-latest",
+            flags: "-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -G Ninja"
           }
           - {
-              name: "MacOS",
-              os: "macos-11",
-              flags: "-G Ninja"
+            name: "MacOS",
+            os: "macos-11",
+            flags: "-G Ninja"
           }
     steps:
       - name: Checkout
@@ -71,7 +71,7 @@ jobs:
         run: |
           brew update
           brew install cmake ninja
-      
+
       - name: Install Conan
         uses: turtlebrowser/get-conan@main
         with:
