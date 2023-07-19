@@ -1,5 +1,14 @@
 #include "core/game.h"
 
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Window/Event.hpp>
+
+#include "component/sprite_renderer.h"
+#include "component/transform.h"
+#include "core/factory.h"
+#include "system/renderer.h"
+
 namespace core {
 Game::Game()
     : window_ {sf::VideoMode {800, 600}, "Pacman"},
@@ -24,12 +33,19 @@ void Game::Run() noexcept {
 void Game::Render(sf::RenderWindow *window) noexcept {
     window->setActive(true);
 
-    sf::CircleShape shape(50.f);
-    shape.setFillColor(sf::Color(100, 250, 50));
+    entt::entity e = registry_.create();
+
+    registry_.emplace<comp::Transform>(e, sf::Vector2f {30.0f, 40.0f});
+
+    sf::Texture texture;
+    texture.loadFromFile("data/sprites/frog.png");
+    registry_.emplace<comp::SpriteRenderer>(e, sf::Sprite(texture));
 
     while (window->isOpen()) {
         window->clear(sf::Color::Black);
-        window->draw(shape);
+
+        sys::renderer::RenderSprites(registry_, window);
+
         window->display();
     }
 }

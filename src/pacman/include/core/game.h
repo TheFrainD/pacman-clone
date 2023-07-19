@@ -1,6 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Thread.hpp>
+#include <entt/entity/registry.hpp>
 
 namespace core {
 class Game {
@@ -19,6 +21,7 @@ public:
 private:
     sf::RenderWindow window_;
     sf::Thread render_thread_;
+    entt::registry registry_;
 
     void Render(sf::RenderWindow *window) noexcept;
 };
