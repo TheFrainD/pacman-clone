@@ -7,13 +7,10 @@
 #include "system/renderer.h"
 
 namespace core {
-Game::Game()
-    : window_ {sf::VideoMode {800, 600}, "Pacman"},
-      render_thread_ {[this](auto *window) { this->Render(window); }, &window_} {
-    window_.setActive(false);
-    render_thread_.launch();
+Game::Game() : window_ {sf::VideoMode {800, 600}, "Pacman"} {
+    window_.setVerticalSyncEnabled(true);
 
-    const auto player = factory::CreatePlayer(registry_, cache_manager_);
+    const auto player {factory::CreatePlayer(registry_, cache_manager_)};
 }
 
 Game::~Game() {}
@@ -30,18 +27,12 @@ void Game::Run() noexcept {
         }
 
         sys::player::InputUpdate(registry_, dt);
-    }
-}
 
-void Game::Render(sf::RenderWindow *window) noexcept {
-    window->setActive(true);
+        window_.clear(sf::Color::Black);
 
-    while (window->isOpen()) {
-        window->clear(sf::Color::Black);
+        sys::renderer::RenderSprites(registry_, window_);
 
-        sys::renderer::RenderSprites(registry_, window);
-
-        window->display();
+        window_.display();
     }
 }
 }  // namespace core

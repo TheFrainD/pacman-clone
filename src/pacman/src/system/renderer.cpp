@@ -7,12 +7,12 @@
 
 namespace sys::renderer {
 
-void RenderSprites(entt::registry &registry, sf::RenderWindow *window) noexcept {
+void RenderSprites(entt::registry &registry, sf::RenderWindow &window) noexcept {
     const auto view = registry.view<comp::Transform, comp::SpriteRenderer>();
 
     view.each([&](auto &transform, auto &sprite_renderer) {
         sprite_renderer.sprite->setPosition(transform.position);
-        window->draw(*sprite_renderer.sprite);
+        window.draw(*sprite_renderer.sprite);
     });
 }
 

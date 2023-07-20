@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Thread.hpp>
 #include <entt/entity/registry.hpp>
 
 #include "core/res/cache_manager.h"
@@ -22,11 +21,8 @@ public:
 
 private:
     sf::RenderWindow window_;
-    sf::Thread render_thread_;
     sf::Clock dt_clock_;
     entt::registry registry_;
     res::CacheManager cache_manager_;
-
-    void Render(sf::RenderWindow *window) noexcept;
 };
 }  // namespace core

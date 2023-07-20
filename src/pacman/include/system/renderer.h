@@ -6,6 +6,6 @@
 
 namespace sys::renderer {
 
-void RenderSprites(entt::registry &registry, sf::RenderWindow *window) noexcept;
+void RenderSprites(entt::registry &registry, sf::RenderWindow &window) noexcept;
 
 }
