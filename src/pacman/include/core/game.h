@@ -23,6 +23,7 @@ public:
 private:
     sf::RenderWindow window_;
     sf::Thread render_thread_;
+    sf::Clock dt_clock_;
     entt::registry registry_;
     res::CacheManager cache_manager_;
 

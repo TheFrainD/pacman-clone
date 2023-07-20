@@ -1,10 +1,9 @@
 #include "core/game.h"
 
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include "core/factory.h"
+#include "system/player.h"
 #include "system/renderer.h"
 
 namespace core {
@@ -21,12 +20,16 @@ Game::~Game() {}
 
 void Game::Run() noexcept {
     while (window_.isOpen()) {
+        const float dt {dt_clock_.restart().asSeconds()};
+
         sf::Event event;
         while (window_.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window_.close();
             }
         }
+
+        sys::player::InputUpdate(registry_, dt);
     }
 }
 
