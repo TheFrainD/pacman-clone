@@ -20,7 +20,7 @@ entt::entity CreatePlayer(entt::registry &registry, core::res::CacheManager &cac
 
     auto sprite_res = cache_manager.AddResource<sf::Sprite>("frog_sprite"_hs, *texture);
 
-    registry.emplace<comp::SpriteRenderer>(e, sprite_res.first->second);
+    registry.emplace<comp::SpriteRenderer>(e, sprite_res.first->second, sf::IntRect(0, 0, 11, 1));
 
     return e;
 }
